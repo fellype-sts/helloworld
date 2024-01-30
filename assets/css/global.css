@@ -44,6 +44,8 @@ a:hover {
     height: 100%;
     max-width: 1024px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Cabeçalho (header) */
@@ -100,7 +102,8 @@ header {
     outline: none;
 }
 .search-icon {
-    border-radius: 1rem;
+    border-radius: 50%;
+    padding: .5rem 0.70rem ;
 }
 /* Menu principal (nav) */
 nav {
@@ -142,6 +145,7 @@ nav a i:hover {
 main {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 main aside,
@@ -150,11 +154,11 @@ main article {
 }
 
 main article {
-    background-color: rgb(20, 20, 28);
+    background-color: rgb(54, 54, 54);
 }
 
 main aside {
-    background-color: rgb(20, 20, 28);
+    background-color: rgb(54, 54, 54);
 }
 
 /* Rodapé (footer) */
@@ -162,6 +166,7 @@ footer {
     background-color: rgb(54, 54, 54);
     display: flex;
     align-items: center;
+    border: 1px solid rgb(41, 41, 41);
 }
 
 footer>div {
