@@ -19,12 +19,12 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.3;
+    color: white;
 }
 
 body {
-    background-color: rgb(114, 114, 114);
+    background-color: #14141c;
     background-attachment: fixed;
-
 }
 
 /* Elementos de uso geral */
@@ -48,7 +48,7 @@ a:hover {
 
 /* Cabeçalho (header) */
 header {
-    background-color: rgb(224, 62, 62);
+    background-color: rgb(124, 60, 164);
     display: flex;
     flex-direction: column;
 }
@@ -79,49 +79,65 @@ header {
 
 .header-search {
     padding: 1rem;
-    background-color: black;
+    border-radius: 10rem;
 }
-
 .header-search form {
     height: 100%;
-    align-items: center;
     display: flex;
+    flex-direction: row;
+    padding: 1px;
+   
 }
 
 .header-search form input {
-    flex-grow: 1;
+    flex-grow: 2;
+    border: 0;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    float: left ;
 }
-
+.header-search form input:focus {
+    outline: none;
+}
+.search-icon {
+    border-radius: 1rem;
+}
 /* Menu principal (nav) */
 nav {
-    background-color: rgb(224, 62, 62);
-    border-top: 1px solid rgb(0, 0, 0);
-    border-bottom: 1px solid rgb(0, 0, 0);
+    background-color: rgb(124, 60, 164);
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
 nav a {
-    padding: 1rem;
+    padding: .5rem 1rem 1rem;
+    text-decoration: none;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: black;
+    color: rgb(216, 179, 206);
+}
+
+nav a span:hover {
+    text-decoration: underline;
 }
 
 nav a:hover {
-    color: white;
+    text-decoration: none;
+    color: white
 }
 
 nav a i {
     font-size: 2rem;
 }
+
 nav a i:hover {
     text-decoration: none;
-   
+
 }
+
 /* Conteúdo principal */
 main {
     display: flex;
@@ -134,11 +150,11 @@ main article {
 }
 
 main article {
-    background-color: white;
+    background-color: rgb(20, 20, 28);
 }
 
 main aside {
-    background-color: white;
+    background-color: rgb(20, 20, 28);
 }
 
 /* Rodapé (footer) */
@@ -192,29 +208,30 @@ button {
         min-width: 14rem;
         max-width: 14rem;
     }
+
     header {
         flex-direction: row;
         justify-content: space-between;
-    } 
+    }
+
     .header-search {
         width: 70%;
 
     }
-    
+
     .header-search form {
         display: flex;
         align-items: center;
     }
-    
+
     .header-search form input {
         flex-grow: 1;
     }
-    
+
 }
 
 
-@media screen and (min-width: 425px) 
-{
+@media screen and (min-width: 425px) {
     nav a i {
         font-size: 1.25rem;
         margin-bottom: 0;
