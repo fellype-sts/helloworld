@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <title>Hello World</title>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <div class="header-title-logo">
+                <a href="index.html" title="Página inicial">
+                    <img class="logo" src="assets/img/logo.png" alt="Logotipo de Hello World">
+                </a>
+                <div class="header-title">
+                    <h1>Hello World</h1>
+                    <small>Lendo e Aprendendo.</small>
+                </div>
+            </div>
+            <div class="header-search">
+                <form class="form-wrapper" action="" method="get">
+                    <input type="search" name="q" id="search" placeholder="Pesquisar...">
+                    <button type="submit" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </div>
+        </header>
+        <nav>
+            <a href="index.php" title="Página Inicial">
+                <i class="fa-solid fa-house-chimney" style="text-decoration: none;"></i>
+
+                <span>Início</span>
+            </a>
+
+            <a href="contacts.php" title="Fale Conosco">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span>Contatos</span>
+            </a>
+
+            <a href="about.php" title="Sobre nós">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Sobre</span>
+            </a>
+
+        </nav>
+
+        <main>
