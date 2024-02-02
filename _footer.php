@@ -9,6 +9,7 @@
         </footer>
     </div>
     <script src="assets/js/global.js"></script>
+    <script src="assets/js/<?php echo $page["js"] ?> "></script>
 
 </body>
 

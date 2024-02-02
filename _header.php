@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/global.css">
-    <title>Hello World</title>
+    <link rel="stylesheet" href="assets/css/<?php echo $page["css"] ?>">
+    <title>Rabbid <?php echo $page["title"] ?></title>
 </head>
 
 <body>
@@ -13,7 +14,7 @@
         <header>
             <div class="header-title-logo">
                 <a href="index.html" title="Página inicial">
-                    <img class="logo" src="assets/img/logo.png" alt="Logotipo de Hello World">
+                    <img class="logo" src="assets/img/<?php echo $site["logo"]?>" alt="Logotipo de Hello World">
                 </a>
                 <div class="header-title">
                     <h1>Hello World</h1>
