@@ -2,7 +2,9 @@
 
 
 header("Content-type: text/html; charset=utf-8");
-
+setlocale(LC_ALL,'pt_BR.UTF8');
+mb_internal_encoding('UTF8'); 
+mb_regex_encoding('UTF8');
 /* Global Settings of the site, set on your demand*/ 
 
 $site = [
@@ -13,8 +15,8 @@ $site = [
     "mysql_hostname" => "localhost",
     "mysql_username" => "root",
     "mysql_password" => "",
-    "mysql_database" => "helloword"
-
+    "mysql_database" => "helloword",
+    "summary_length" => 40
 ];
 
 /* Connect MySQL with MySQLi*/ 
@@ -27,6 +29,15 @@ $conn = new mysqli(
 
 /* For error in connection with database*/ 
 if ($conn->connect_error) die("Falha de conexão com o banco e dados: " . $conn->connect_error);
+
+/*Set charset*/
+$conn->query("SET NAMES 'utf8'");
+$conn->query('SET character_set_connection=utf8');
+$conn->query('SET character_set_client=utf8');
+$conn->query('SET character_set_results=utf8');
+/*Set Date to brazilian format*/
+$conn->query('SET GLOBAL lc_time_names = pt_BR');
+$conn->query('SET lc_time_names = pt_BR');
 
 /*********************************
 * Globals Functions of the site *

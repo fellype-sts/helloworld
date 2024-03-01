@@ -199,10 +199,9 @@ VALUES
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum quia distinctio iusto exercitationem qui accusantium ex ullam, excepturi illo quisquam beatae, nisi ad earum reprehenderit, maiores asperiores fuga nulla accusamus.</p>
         '
     );
-
 -- Popular tabela 'comment'.
 -- Popular tabela 'contact'.
-;
+
 
 INSERT INTO
     comment (

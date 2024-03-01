@@ -14,18 +14,3 @@
 </body>
 
 </html>
-SELECT 
--- Get id, title, thumbnail, summary field
-	art_id, art_date, art_thumbnail,art_title, art_summary
-FROM article
-
--- Filters 
-	WHERE
--- 	Get only recent or past articles
--- Don't get scheduled articles to future
-	 art_date <= NOW()
-     
--- Get only articles with status on
-	AND art_status = 'on'
--- Ordered by most recent date
-ORDER BY art_date DESC;
