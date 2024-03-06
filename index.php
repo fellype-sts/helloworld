@@ -77,7 +77,7 @@ SELECT art_id, art_title, art_summary, art_thumbnail FROM article
 ORDER BY art_views DESC
 LIMIT 3;
 SQL;
-$aside = "alu";
+$aside = "";
 //Call SQL
 $result = $conn->query($sql2);
 

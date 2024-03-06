@@ -79,23 +79,89 @@ WHERE art_id = '{$id}';
 SQL;
 $conn->query($sql);
 
+// Select author type
+switch ($art['emp_type']) {
+    case 'admin':
+        $emp_type = 'administrador(a)';
+        break;
+    case 'author':
+        $emp_type = 'autor(a)';
+        break;
+    case 'moderator':
+        $emp_type = 'moderador(a)';
+        break;
+    default:
+        $emp_type = 'indefinido(a)';
+};
 
-//Load site header
-require("_header.php");
+//Creat view aside to author
+$aside_author = <<<HTML
 
-$aside = <<< HTML
-<div class='aside'> 
-    <img src="{$art['emp_photo']}" alt="{art['emp_name']}">
-    <h3> {$art['emp_name']}</h3>
-    <p>Idade: {$art['emp_age']} </p>
+<div class="aside-author">
+    <img src="{$art['emp_photo']}" alt="{$art['emp_name']}">
+    <h4>{$art['emp_name']}</h4>
+    <ul>
+        <li>{$art['emp_age']} anos</li>    
+        <li>Colaborador desde {$art['emp_datebr']} como {$emp_type}.</li>
+    </ul>
 </div>
 
 HTML;
+
+// Get others articles of authors
+$sql = <<<SQL
+
+SELECT
+	art_id, art_thumbnail, art_title    
+FROM `article`
+WHERE 
+
+	art_author = '{$art['emp_id']}'
+   
+    AND art_id != '{$art['art_id']}'
+    
+    AND art_date <= NOW()
+    
+    AND art_status = 'on'
+
+ORDER BY RAND()
+
+LIMIT 3;
+
+SQL;
+$res = $conn->query($sql);
+
+// Inicializa a view
+$aside_articles = '<div class="aside-article"><h4>+ Artigos</h4>' . "\n";
+
+
+
+// Loop
+while ($aart = $res->fetch_assoc()) :
+
+    $aside_articles .= <<<HTML
+<div onclick="location.href:'/view.php?id={$aart['art_id']}'">
+<img src="{$aart['art_thumbnail']}" alt="{$aart['art_title']}">
+<h5>{$aart['art_title']}</h5>
+</div>
+
+HTML;
+
+endwhile;
+
+// Fecha view
+$aside_articles .= '</div>';
+
+//Load site header
+require("_header.php");
 
 ?>
 
 <article><?php echo $article ?></article>
 
-<aside><?php echo $aside ?></aside>
+<aside><?php
+    echo $aside_author; 
+    echo $aside_articles; 
+    ?></aside>
 
 <?php require("_footer.php"); ?>
