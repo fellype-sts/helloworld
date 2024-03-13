@@ -51,8 +51,12 @@
     padding: 0 1rem;
 }
 .aside img {
+    -webkit-mask-image: linear-gradient(to top, transparent 5%, black 55%);
     width: 100%;
     height: auto;
     display: flex;
     border-radius: .8rem;
+}
+.aside:hover {
+    background-color: rgb(105, 105, 105);
 }

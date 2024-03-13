@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 
 header("Content-type: text/html; charset=utf-8");
-setlocale(LC_ALL,'pt_BR.UTF8');
-mb_internal_encoding('UTF8'); 
+setlocale(LC_ALL, 'pt_BR.UTF8');
+mb_internal_encoding('UTF8');
 mb_regex_encoding('UTF8');
-/* Global Settings of the site, set on your demand*/ 
+/* Global Settings of the site, set on your demand*/
 
 $site = [
     "sitename" => "Olá Mundo",
@@ -16,10 +16,24 @@ $site = [
     "mysql_username" => "root",
     "mysql_password" => "",
     "mysql_database" => "helloword",
-    "summary_length" => 40
+    "summary_length" => 40,
+    "social_list" => [
+        [
+            "name" => "GitHub.com",
+            "link" => "https://github.com/fellype-sts",
+            "icon" => "fa-brands fa-square-github fa-fw",
+            "color" => "#333"
+        ], [
+            "name" => "LinkedIn",
+            "link" => "https://www.linkedin.com/in/luferat/",
+            "icon" => "fa-brands fa-linkedin fa-fw",
+            "color" => "#0a66c2"
+        ]
+    ]
 ];
 
-/* Connect MySQL with MySQLi*/ 
+
+/* Connect MySQL with MySQLi*/
 $conn = new mysqli(
     $site["mysql_hostname"],
     $site["mysql_username"],
@@ -27,7 +41,7 @@ $conn = new mysqli(
     $site["mysql_database"]
 );
 
-/* For error in connection with database*/ 
+/* For error in connection with database*/
 if ($conn->connect_error) die("Falha de conexão com o banco e dados: " . $conn->connect_error);
 
 /*Set charset*/
@@ -40,8 +54,8 @@ $conn->query('SET GLOBAL lc_time_names = pt_BR');
 $conn->query('SET lc_time_names = pt_BR');
 
 /*********************************
-* Globals Functions of the site *
-*********************************/
+ * Globals Functions of the site *
+ *********************************/
 
 /**
  * Function for debugging
@@ -59,8 +73,9 @@ $conn->query('SET lc_time_names = pt_BR');
  * Tip: switch between print_r() and var_dump() to see what is best for your case,
  * just comment one and uncomment another in the function code.
  **/
-function debug($target, $exit = false ) {
+function debug($target, $exit = false)
+{
     print_r($target);
     //var_dump($target);
-    if($exit) exit();
+    if ($exit) exit();
 }
