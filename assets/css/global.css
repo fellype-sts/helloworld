@@ -129,7 +129,6 @@ nav a span:hover {
 }
 
 nav a:hover {
-    padding: 1rem .5rem;
     text-decoration: none;
     color: white
 }

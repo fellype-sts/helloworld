@@ -157,7 +157,9 @@ require("_header.php");
 
 ?>
 
-<article><?php echo $article ?></article>
+<article><?php echo $article ?>
+<?php require("widgets/_comments.php")?>
+</article>
 
 <aside><?php
     echo $aside_author; 
