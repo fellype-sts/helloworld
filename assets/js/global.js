@@ -77,3 +77,8 @@ function convertTimestampToDateFormat(timestamp) {
 
     return `${day}/${month}/${year} às ${hour}:${min}`;
 }
+function stripTags(htmlText) {
+    let div = document.createElement('div');
+    div.innerHTML = htmlText.trim().replace(/<script>.*<\/script>/, '');
+    return div.textContent;
+}
