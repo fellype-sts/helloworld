@@ -3,7 +3,9 @@
   border-radius: .8rem;
   background-color:rgb(83, 81, 81);
 }
+.article small{
 
+}
 .aside-author img {
   margin-top: 1rem;
   display: flex;
@@ -139,4 +141,14 @@ padding-bottom: 1rem;
 
 #commentForm:invalid textarea {
   background-color: rgb(255, 230, 230);
+}
+
+.article small {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .article small {
+    text-align: right;
+  }
 }

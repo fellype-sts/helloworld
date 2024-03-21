@@ -79,7 +79,7 @@ header {
 .header-title small {
     letter-spacing: .03rem;
 }
-
+/*
 .header-search {
     padding: 1rem;
     border-radius: 10rem;
@@ -106,6 +106,35 @@ header {
     border-radius: 50%;
     padding: .5rem 0.70rem ;
 }
+*/
+
+.header-search {
+    padding: 1rem;
+}
+
+.header-search form {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.header-search form input,
+.header-search form button {
+    padding: .5rem;
+    border: none;
+    background-color: white;
+}
+
+.header-search form input {
+    flex-grow: 1;
+    border-radius: .35rem 0 0 .35rem;
+}
+
+.header-search form button {
+    border-radius: 0 .35rem .35rem 0;
+    color: grey;
+}
+
 /* Menu principal (nav) */
 nav {
     background-color: rgb(124, 60, 164);

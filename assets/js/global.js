@@ -19,6 +19,7 @@ const userAccess = document.getElementById('userAccess');
 const userImg = document.getElementById('userImg');
 const userIcon = document.getElementById('userIcon');
 const userLabel = document.getElementById('userLabel');
+const hearderSearch = document.getElementById('headerSearch')
 
 // Monitora se houve mudanças na autenticação do usuário
 firebase.auth().onAuthStateChanged((user) => {
@@ -37,7 +38,7 @@ firebase.auth().onAuthStateChanged((user) => {
 // Função que trata o usuário logado
 function isLogged(user) {
     // Altera href do link
-    userAccess.href = `profile.php?ref=${location.href}`;
+    userAccess.href = `profile.php?uid=${user.uid}&ref=${location.href}`;
     // Altera title do link
     userAccess.title = `Ver perfil de ${user.displayName}`;
     // Oculta o ícone de login
@@ -81,4 +82,12 @@ function stripTags(htmlText) {
     let div = document.createElement('div');
     div.innerHTML = htmlText.trim().replace(/<script>.*<\/script>/, '');
     return div.textContent;
+}
+
+// Função que valida o preenchimento do formulário de busca
+function searchCheck(){
+    // Sanitize
+    headerSearch.value = (stripTags(headerSearch.value.trim()));
+    //If the field doesnt have a value, stops the form 
+    if(headerSearch.value == '') return false;
 }

@@ -13,6 +13,9 @@ firebase.auth().onAuthStateChanged((user) => {
         showUserCard(user);
         btnGoogleProfile.addEventListener('click', viewProfile);
         btnLogout.addEventListener('click', fbLogout);
+        linkToProfile.innerHTML = `
+            <a href="profile.php?uid=${user.uid}">Clique aqui para ver seus comentários</a>
+        `;
     } else {
         //If unloggedd
         var searchParams = new URLSearchParams(window.location.search);
@@ -20,6 +23,7 @@ firebase.auth().onAuthStateChanged((user) => {
         var refValue = searchParams.get('ref');
         // Redireciona para a página de origem
         location.href = refValue ? refValue : 'index.php';
+        
     }
 });
 

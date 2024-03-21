@@ -34,8 +34,8 @@ if (isset($page['js']))
                 </div>
             </div>
             <div class="header-search">
-                <form class="form-wrapper" action="" method="get">
-                    <input type="search" name="q" id="search" placeholder="Pesquisar...">
+                <form class="form-wrapper" action="search.php" method="get" onclick="return searchCheck()">
+                    <input type="search" name="q" id="headerSearch" placeholder="Pesquisar...">
                     <button type="submit" class="search-icon"><i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>

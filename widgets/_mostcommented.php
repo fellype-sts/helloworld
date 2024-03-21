@@ -3,10 +3,11 @@
 //Get a list with most commented articles in the site
 $sql = <<<SQL
 
-SELECT cmt_article, art_title, art_summary
-FROM comment INNER JOIN article WHERE cmt_article = art_id AND cmt_status = 'on'
+SELECT cmt_article, COUNT(*) AS total_comments,
+ art_title, art_summary
+FROM comment INNER JOIN article WHERE cmt_article = art_id AND cmt_status = 'on' AND art_status = 'on' AND art_date <= NOW()
 GROUP BY cmt_article
-ORDER BY COUNT(*) DESC
+ORDER BY total_comments DESC
 LIMIT 3;
 SQL;
 
@@ -35,6 +36,7 @@ while ($most_cmt = $res->fetch_assoc()) {
     <div>
     <h5>{$most_cmt['art_title']}</h5>
     <p><small title="{most_cmt['art_summary']}">{$art_summary}</small></p>
+    <p class="commented"><small>{$tot}</small></p>
     </div>
 </div>
 HTML;
