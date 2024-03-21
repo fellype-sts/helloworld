@@ -99,11 +99,13 @@ $aside_author = <<<HTML
 
 <div class="aside-author">
     <img src="{$art['emp_photo']}" alt="{$art['emp_name']}">
-    <h4>{$art['emp_name']}</h4>
-    <ul>
-        <li>{$art['emp_age']} anos</li>    
-        <li>Colaborador desde {$art['emp_datebr']} como {$emp_type}.</li>
-    </ul>
+    <div>
+        <h3>{$art['emp_name']}</h3>
+        <ul>
+            <li>{$art['emp_age']} anos</li>    
+            <li>Colaborador desde {$art['emp_datebr']} como {$emp_type}.</li>
+        </ul>
+    </div>
 </div>
 
 HTML;
@@ -132,15 +134,16 @@ SQL;
 $res = $conn->query($sql);
 
 // Inicializa a view
-$aside_articles = '<div class="aside-article"><h4>+ Artigos</h4>' . "\n";
-
+$aside_articles = <<<HTML
+    <div class="aside-article"><h5>+ Artigos de {$art['emp_name']}</h5>
+HTML;
 
 
 // Loop
 while ($aart = $res->fetch_assoc()) :
 
     $aside_articles .= <<<HTML
-<div onclick="location.href:'/view.php?id={$aart['art_id']}'">
+<div class="aside_img" onclick="location.href:'/view.php?id={$aart['art_id']}'">
 <img src="{$aart['art_thumbnail']}" alt="{$aart['art_title']}">
 <h5>{$aart['art_title']}</h5>
 </div>
