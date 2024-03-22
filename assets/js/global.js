@@ -91,3 +91,15 @@ function searchCheck(){
     //If the field doesnt have a value, stops the form 
     if(headerSearch.value == '') return false;
 }
+
+// Função que gera a data atual como string no formato ISO → 'YYYY-MM-DD HH:II:SS'.
+function now() {
+    // Obtém a data atual  
+    let nowDate = new Date();
+    // Ajusta o 'timezone'.
+    nowDate = new Date(nowDate.getTime() - (nowDate.getTimezoneOffset() * 60 * 1000));
+    // Formata a data para 'YYYY-MM-DD HH:II:SS'
+    const outDate = nowDate.toISOString().split('.')[0].replace('T', ' ');
+    // Retorna a data.
+    return outDate;
+}

@@ -133,9 +133,12 @@ LIMIT 3;
 SQL;
 $res = $conn->query($sql);
 
+
+$name = explode(' ', $art['emp_name'])[0];
+
 // Inicializa a view
 $aside_articles = <<<HTML
-    <div class="aside-article"><h5>+ Artigos de {$art['emp_name']}</h5>
+    <div class="aside-article"><h5>+ Artigos de {$name}</h5>
 HTML;
 
 
