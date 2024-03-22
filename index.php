@@ -69,96 +69,8 @@ else :
     endwhile;
 
 endif;
-//debug($articles);
 
-//exit();
-$sql2 = <<<SQL
-SELECT art_id, art_title, art_summary, art_thumbnail FROM article 
-ORDER BY art_views DESC
-LIMIT 3;
-SQL;
-$aside = "";
-//Call SQL
-$result = $conn->query($sql2);
-
-while ($mv = $result->fetch_assoc()) :
-
-    // Cria uma variável '$art_summary' para o resumo
-    $art_summary = $mv['art_summary'];
-
-    // Se o resumo tem mais de X caracteres
-    // Referências: https://www.w3schools.com/php/func_string_strlen.asp
-    if (strlen($mv['art_summary']) > $site['summary_length'])
-
-        // Corta o resumo para a quantidade de caracteres correta
-        // Referências: https://www.php.net/mb_substr
-        $art_summary = mb_substr(
-            $mv['art_summary'],         // String completa, a ser cortada
-            0,                          // Posição do primeiro caracter do corte
-            $site['summary_length']     // Tamanho do corte
-        ) . "...";                      // Concatena reticências no final
-
-    $aside .= <<<HTML
-
-<div class="aside" onclick="location.href = 'view.php?id={$mv['art_id']}'">
-<img src="{$mv['art_thumbnail']}" alt="{$mv['art_title']}">
-<div>
-    <h4>{$mv['art_title']}</h4>
-    <p>{$mv['art_summary']}</p>
-</div>
-</div>
-
-HTML;
-endwhile;
-
-
-//MOST COMMENTED
-
-//Get a list with most commented articles in the site
-$sql = <<<SQL
-
-SELECT cmt_article, art_title, art_summary
-FROM comment INNER JOIN article WHERE cmt_article = art_id AND cmt_status = 'on'
-GROUP BY cmt_article
-ORDER BY COUNT(*) DESC
-LIMIT 3;
-SQL;
-
-// execute the querry and stores result in res
-$res = $conn->query($sql);
-
-//Variable that stores the html
-$aside .= '<h3>Artigos + comentados</h3><div class="viewed">';
-
-// Loop to get each register
-while ($most_cmt = $res->fetch_assoc()) {
-
-    // Create a var to store teh summary
-    $art_summary = $most_cmt['art_summary'];
-
-    //If summary is too long
-    if(strlen($most_cmt['art_summary']) > $site['summary_length'])
-    $art_summary= mb_substr(
-        $most_cmt['art_summary'], 0, $site['summary_length']
-    ). "...";
-
-    //Build the HTML
-    $aside .= <<<HTML
-
-<div class = "aside" onclick="location.href = 'view.php?id={$most_cmt['cmt_article']}#comment'">
-    <div>
-    <h5>{$most_cmt['art_title']}</h5>
-    <p><small title="{$most_cmt['art_summary']}">{$art_summary}</small></p>
-    </div>
-</div>
-HTML;
-}
-
-//debug($aside,true);
-/* Load header page  */
-require("_header.php");
-
-
+require('_header.php')
 ?>
 
 <article>
@@ -166,8 +78,10 @@ require("_header.php");
     <?php echo $articles ?>
 </article>
 
-<aside><h3>Artigos mais Vistos</h3>
-<?php echo $aside ?>
-</aside>
+<aside> <?php 
+require("widgets/_mostviewed.php");
+
+require("widgets/_mostcommented.php");
+?></aside>
 
 <?php require("_footer.php"); ?>

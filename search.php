@@ -111,47 +111,6 @@ HTML;
 
 endif;
 
-
-//exit();
-$sql2 = <<<SQL
-SELECT art_id, art_title, art_summary, art_thumbnail FROM article 
-ORDER BY art_views DESC
-LIMIT 3;
-SQL;
-$aside = "";
-//Call SQL
-$result = $conn->query($sql2);
-
-while ($mv = $result->fetch_assoc()) :
-
-    // Cria uma variável '$art_summary' para o resumo
-    $art_summary = $mv['art_summary'];
-
-    // Se o resumo tem mais de X caracteres
-    // Referências: https://www.w3schools.com/php/func_string_strlen.asp
-    if (strlen($mv['art_summary']) > $site['summary_length'])
-
-        // Corta o resumo para a quantidade de caracteres correta
-        // Referências: https://www.php.net/mb_substr
-        $art_summary = mb_substr(
-            $mv['art_summary'],         // String completa, a ser cortada
-            0,                          // Posição do primeiro caracter do corte
-            $site['summary_length']     // Tamanho do corte
-        ) . "...";                      // Concatena reticências no final
-
-    $aside .= <<<HTML
-
-<div class="aside" onclick="location.href = 'view.php?id={$mv['art_id']}'">
-<img src="{$mv['art_thumbnail']}" alt="{$mv['art_title']}">
-<div>
-    <h4>{$mv['art_title']}</h4>
-    <p>{$mv['art_summary']}</p>
-</div>
-</div>
-
-HTML;
-endwhile;
-
 // Inclui o cabeçalho do documento
 require('_header.php');
 ?>
@@ -163,7 +122,12 @@ require('_header.php');
     ?>
 </article>
 
-<aside><?php echo $aside ?></aside>
+<aside><?php 
+    require("widgets/_mostviewed.php");
+    
+    if ($total > 4)
+        require('widgets/_mostcommented.php')
+?></aside>
 
 <?php
 // Inclui o rodapé do documento

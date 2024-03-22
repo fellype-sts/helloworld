@@ -1,45 +1,61 @@
 <?php 
 
+$num_list = isset($num_list) ? intval($num_list) : 3;
+
 //Get a list with most commented articles in the site
 $sql = <<<SQL
 
-SELECT cmt_article, COUNT(*) AS total_comments,
- art_title, art_summary
-FROM comment INNER JOIN article WHERE cmt_article = art_id AND cmt_status = 'on' AND art_status = 'on' AND art_date <= NOW()
+SELECT 
+    cmt_article, COUNT(*) AS total_comments,
+    art_title, art_summary
+FROM comment 
+    INNER JOIN article ON cmt_article = art_id 
+WHERE 
+    cmt_status = 'on' 
+AND art_status = 'on' 
+AND art_date <= NOW()
 GROUP BY cmt_article
 ORDER BY total_comments DESC
-LIMIT 3;
+LIMIT  {$num_list};
 SQL;
 
 // execute the querry and stores result in res
 $res = $conn->query($sql);
 
 //Variable that stores the html
-$aside_cmt = '<h3>Artigos + comentados</h3><div class="viewed">';
+
 
 // Loop to get each register
-while ($most_cmt = $res->fetch_assoc()) {
+if ($res->num_rows >0):
 
-    // Create a var to store teh summary
-    $art_summary = $most_cmt['art_summary'];
+    $aside_cmt = '<h3>Artigos + comentados</h3><div class="viewed">';
 
-    //If summary is too long
-    if(strlen($most_cmt['art_summary']) > $site['summary_length'])
-    $art_summary= mb_substr(
-        $most_cmt['art_summaty'], 0, $site['summary_length']
-    ). "...";
+    while ($most_cmt = $res->fetch_assoc()) :
 
-    //Build the HTML
-    $aside_cmt .= <<<HTML
+        if ($most_cmt['total_comments'] == 1) 
+            $tot = '1 comentário.';
+        else
+            $tot = $most_cmt['total_comments'] . ' comentários';
+    
+        //Build the HTML
+        $aside_cmt .= <<<HTML
 
-<div onclick="loction.href = 'view.php?id={$most_cmt['art_id']}'">
-    <div>
-    <h5>{$most_cmt['art_title']}</h5>
-    <p><small title="{most_cmt['art_summary']}">{$art_summary}</small></p>
-    <p class="commented"><small>{$tot}</small></p>
-    </div>
-</div>
-HTML;
-}
-$aside_cmt .= '</div>'
+        <div class="aside" onclick="location.href = 'view.php?id={$most_cmt['cmt_article']}'">
+            <div>
+                <h5>{$most_cmt['art_title']}</h5>
+                <p><small title="{most_cmt['art_summary']}">{$most_cmt['art_summary']}</small></p>
+                <p class="commented"><small>{$tot}</small></p>
+            </div>
+        </div>
+        HTML;
+    endwhile;
+endif;
+;
+// Close aside_cmt
+$aside_cmt .= '</div>';
+
+
+// Send to view
+echo $aside_cmt
+
 ?>
