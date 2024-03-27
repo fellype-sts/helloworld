@@ -27,7 +27,7 @@ if ($query != '') :
 -- Referências: https://www.w3schools.com/mysql/mysql_like.asp
 
 SELECT 
-	art_id, art_thumbnail, art_title, art_summary 
+	art_id 
 FROM article 
 WHERE
 	-- Requisitos padrão
@@ -40,7 +40,6 @@ WHERE
 ORDER BY art_date DESC;
 
 SQL;
-
     // Prepara a query de busca
     $search_query = "%{$query}%";
 
@@ -73,22 +72,11 @@ SQL;
 
 HTML;
 
-        while ($art = $res->fetch_assoc()) :
+while ($art = $res->fetch_assoc())
+$search_view .= view_article($art['art_id']);
 
-            $search_view .= <<<HTML
 
-<div class="article" onclick="location.href = 'view.php?id={$art['art_id']}'">
-    <img src="{$art['art_thumbnail']}" alt="{$art['art_title']}">
-    <div>
-        <h4>{$art['art_title']}</h4>
-        <p>{$art['art_summary']}</p>
-    </div>
-</div>
-
-HTML;
-
-        endwhile;
-
+        
     // Se não achou nada:
     else :
         $search_view .= <<<HTML

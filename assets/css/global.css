@@ -287,3 +287,33 @@ button {
 #userImg, #userIcon {
     display: none;
 }
+.aside_block div {
+    background-color: rgb(66, 66, 66);
+    padding: .5rem;
+    border-radius: .35rem;
+    margin-bottom: 1rem;
+}
+
+.clicked {
+    cursor: pointer;
+}
+
+.clicked:hover {
+    background-color: rgb(92, 92, 92)
+}
+
+.aside_block h5 {
+    margin: 0;
+}
+
+.aside_block small {
+    display: block;
+    margin-top: .5rem;
+}
+
+.aside_block small.footer {
+    border-top: 1px dotted grey;
+    padding-top: .25rem;
+    font-size: 70%;
+    text-align: right;
+}

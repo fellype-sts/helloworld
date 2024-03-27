@@ -56,8 +56,10 @@ while ($mv = $res->fetch_assoc()) :
 HTML;
 endwhile;
 
-$aside_viewed .= '</div>';
 
-// Envia para a view
-echo $aside_viewed;
+
 ?>
+
+<div class="aside_block">
+    <?php echo $aside_viewed ?>
+</div>

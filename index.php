@@ -17,8 +17,8 @@ $page = [
 $sql = <<<SQL
 
 SELECT 
--- Get id, title, thumbnail, summary field
-	art_id, art_date, art_thumbnail,art_title, art_summary
+-- Get id
+	art_id
 FROM article
 
 -- Filters 
@@ -49,24 +49,19 @@ $articles = "<p>Total de {$total} artigos.</p>";
 /* If doesn't have articles */
 
 if ($total == 0) :
-    $articles = "<p>Não achei nada!</p>";
+    $articles = "<h2>Artigos recentes</h2><p>Não achei nada!</p>";
 else :
 
-    while ($art = $res->fetch_assoc()) :
+    // Título
+    if ($total == 1) $articles = '<h2>Artigo mais recente</h2>';
+    else $articles = "<h2>{$total} artigos mais recentes</h2>";
 
-        $articles .= <<<HTML
+    // Loop para obter cada artigo
+    while ($art = $res->fetch_assoc()) 
+
+        $articles .= view_article($art['art_id']);
+
     
-    <div class="article" onclick="location.href = 'view.php?id={$art['art_id']}'">
-    <img src="{$art['art_thumbnail']}" alt="{$art['art_title']}">
-    <div>
-        <h4>{$art['art_title']}</h4>
-        <p>{$art['art_summary']}</p>
-    </div>
-    </div>
-
-    HTML;
-
-    endwhile;
 
 endif;
 
@@ -74,7 +69,7 @@ require('_header.php')
 ?>
 
 <article>
-    <h2><?php echo $total ?> artigos mais recentes</h2>
+   
     <?php echo $articles ?>
 </article>
 
